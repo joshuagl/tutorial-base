@@ -11,3 +11,20 @@ jobs:
     steps:
       - name: Initialise
         run: echo "initialise"
+
+      - name: Checkout
+        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
+
+      - name: Setup Python
+        uses: actions/setup-python@c4e89fac7e8767b327bbad6cb4d859eda999cf08
+        with:
+          python-version: '3.9'
+
+      - name: Install build requirements
+        run: python3 -m pip install -r requirements-build.txt
+
+      - name: Build
+        run: python3 -m build
+
+      - name: List sums
+        run: sha256sum dist/*
